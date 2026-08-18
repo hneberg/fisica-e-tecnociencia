@@ -1,364 +1,123 @@
-/* =========================================================
-   OPTIBOT
-   JAVASCRIPT
-========================================================= */
-
-
-/* =========================================================
-   MENU MOBILE
-========================================================= */
-
-const menuButton =
-    document.getElementById("menuButton");
-
-const navigation =
-    document.querySelector(".navigation");
-
-
-menuButton.addEventListener("click", () => {
-
-    navigation.classList.toggle("mobile-open");
-
-});
-
-
-/* =========================================================
-   EXECUTAR CÓDIGO
-========================================================= */
-
-const runCode =
-    document.getElementById("runCode");
-
-
-runCode.addEventListener("click", () => {
-
-    runCode.innerText =
-        "⚡ ROBÔ EXECUTANDO...";
-
-
-    runCode.style.background =
-        "linear-gradient(90deg,#ff0077,#ffe600)";
-
-
-    setTimeout(() => {
-
-        runCode.innerText =
-            "✓ CÓDIGO EXECUTADO!";
-
-        runCode.style.background =
-            "linear-gradient(90deg,#00ff9d,#00eaff)";
-
-    }, 1500);
-
-
-    setTimeout(() => {
-
-        runCode.innerText =
-            "▶ EXECUTAR CÓDIGO";
-
-        runCode.style.background =
-            "linear-gradient(90deg,#00eaff,#00ff9d)";
-
-    }, 4000);
-
-});
-
-
-/* =========================================================
-   LABORATÓRIO ÓPTICO
-========================================================= */
-
-const angleSlider =
-    document.getElementById("angleSlider");
-
-const angleValue =
-    document.getElementById("angleValue");
-
-const mirror =
-    document.getElementById("mirror");
-
-const beam =
-    document.getElementById("beam");
-
-const labButton =
-    document.getElementById("labButton");
-
-const labStatus =
-    document.getElementById("labStatus");
-
-
-angleSlider.addEventListener("input", () => {
-
-    const angle =
-        angleSlider.value;
-
-
-    angleValue.innerText =
-        `${45 + Number(angle)}°`;
-
-
-    mirror.style.transform =
-        `rotate(${angle}deg)`;
-
-
-    beam.style.transform =
-        `rotate(${angle / 3}deg)`;
-
-});
-
-
-labButton.addEventListener("click", () => {
-
-    labStatus.innerText =
-        "PROCESSANDO...";
-
-
-    labButton.innerText =
-        "🔬 ANALISANDO LUZ";
-
-
-    setTimeout(() => {
-
-        labStatus.innerText =
-            "EXPERIMENTO OK";
-
-        labStatus.style.color =
-            "#00ff9d";
-
-
-        labButton.innerText =
-            "✓ EXPERIMENTO CONCLUÍDO";
-
-    }, 1800);
-
-
-    setTimeout(() => {
-
-        labButton.innerText =
-            "⚡ ATIVAR EXPERIMENTO";
-
-    }, 4000);
-
-});
-
-
-/* =========================================================
-   QUIZ
-========================================================= */
-
-const answers =
-    document.querySelectorAll(".answers button");
-
-const result =
-    document.getElementById("quizResult");
-
-const progress =
-    document.getElementById("progress");
-
-
-let score = 0;
-
-let answered = false;
-
-
-answers.forEach(button => {
-
-    button.addEventListener("click", () => {
-
-        if (answered) return;
-
-        answered = true;
-
-
-        const answer =
-            button.dataset.answer;
-
-
-        if (answer === "correct") {
-
-            score++;
-
-            button.style.background =
-                "linear-gradient(90deg,#00ff9d,#00eaff)";
-
-            button.style.color =
-                "#00100d";
-
-            result.innerText =
-                "✓ CORRETO! Programação transforma ideias em comandos.";
-
-            result.style.color =
-                "#00ff9d";
-
-        } else {
-
-            button.style.background =
-                "linear-gradient(90deg,#ff0077,#8b00ff)";
-
-            result.innerText =
-                "✕ Quase! Tente novamente na próxima.";
-
-            result.style.color =
-                "#ff0077";
-
-        }
-
-
-        progress.style.width =
-            "100%";
-
-
-        setTimeout(() => {
-
-            answers.forEach(btn => {
-
-                btn.style.background =
-                    "";
-
-                btn.style.color =
-                    "";
-
-            });
-
-
-            result.innerText =
-                "";
-
-            progress.style.width =
-                "25%";
-
-            answered = false;
-
-        }, 2500);
-
+// AGUARDA O CARREGAMENTO COMPLETO DA PÁGINA
+document.addEventListener('DOMContentLoaded', () => {
+    
+    // ELEMENTOS DO DOM
+    const canvas = document.getElementById('opticsCanvas');
+    const ctx = canvas.getContext('2d');
+    
+    const colorSlider = document.getElementById('colorSlider');
+    const speedSlider = document.getElementById('speedSlider');
+    const angleSlider = document.getElementById('angleSlider');
+    const pulseBtn = document.getElementById('pulseBtn');
+    const statusText = document.getElementById('robotStatus');
+
+    // VARIÁVEIS DE ESTADO DO LASER
+    let laserHue = colorSlider.value;
+    let pulseSpeed = parseInt(speedSlider.value);
+    let mirrorAngle = parseInt(angleSlider.value);
+    let photons = [];
+    let isPulsing = false;
+
+    // EVENT LISTENERS
+    colorSlider.addEventListener('input', (e) => {
+        laserHue = e.target.value;
     });
 
-});
+    speedSlider.addEventListener('input', (e) => {
+        pulseSpeed = parseInt(e.target.value);
+    });
 
+    angleSlider.addEventListener('input', (e) => {
+        mirrorAngle = parseInt(e.target.value);
+    });
 
-/* =========================================================
-   ANIMAÇÃO AO ROLAR
-========================================================= */
+    pulseBtn.addEventListener('click', () => {
+        triggerOpticalPulse();
+    });
 
-const animatedElements =
-    document.querySelectorAll(
-        ".technology-section, .flow-card, .quiz-box"
-    );
+    function triggerOpticalPulse() {
+        isPulsing = true;
+        statusText.innerText = "Sinal Óptico Enviado ao Robô!";
+        statusText.style.color = "#ff007f";
 
-
-const observer =
-    new IntersectionObserver(
-        entries => {
-
-            entries.forEach(entry => {
-
-                if (entry.isIntersecting) {
-
-                    entry.target.classList.add(
-                        "visible"
-                    );
-
-                }
-
+        // Cria partículas de fótons
+        for (let i = 0; i < 20; i++) {
+            photons.push({
+                x: 30,
+                y: 200,
+                speedX: pulseSpeed + Math.random() * 2,
+                speedY: 0,
+                size: Math.random() * 4 + 2,
+                reflected: false
             });
-
-        },
-
-        {
-            threshold: 0.15
         }
 
-    );
-
-
-animatedElements.forEach(element => {
-
-    observer.observe(element);
-
-});
-
-
-/* =========================================================
-   EFEITO DO HEADER AO ROLAR
-========================================================= */
-
-const header =
-    document.querySelector(".header");
-
-
-window.addEventListener("scroll", () => {
-
-    if (window.scrollY > 50) {
-
-        header.style.background =
-            "rgba(2,1,8,.9)";
-
-        header.style.boxShadow =
-            "0 10px 40px rgba(0,0,0,.3)";
-
-    } else {
-
-        header.style.background =
-            "rgba(5,2,13,.65)";
-
-        header.style.boxShadow =
-            "none";
-
+        setTimeout(() => {
+            statusText.innerText = "Robô Processou os Dados com Sucesso! 🤖✅";
+            statusText.style.color = "#00f3ff";
+        }, 1500);
     }
 
-});
+    // LOOP DE ANIMAÇÃO DO CANVAS
+    function animate() {
+        // Limpa o canvas
+        ctx.fillStyle = 'rgba(5, 5, 15, 0.2)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
 
+        // 1. DESENHAR O EMISSOR DE LASER (ÓPTICA + ROBÓTICA)
+        ctx.fillStyle = '#333';
+        ctx.fillRect(10, 180, 30, 40);
+        ctx.fillStyle = `hsl(${laserHue}, 100%, 50%)`;
+        ctx.fillRect(35, 195, 10, 10);
 
-/* =========================================================
-   CURSOR / BRILHO
-========================================================= */
+        // 2. DESENHAR O ESPELHO ROBÓTICO NO MEIO
+        ctx.save();
+        ctx.translate(250, 200);
+        ctx.rotate((mirrorAngle * Math.PI) / 180);
+        ctx.fillStyle = '#00f3ff';
+        ctx.shadowBlur = 15;
+        ctx.shadowColor = '#00f3ff';
+        ctx.fillRect(-5, -40, 10, 80);
+        ctx.restore();
 
-document.addEventListener(
-    "mousemove",
-    event => {
+        // 3. DESENHAR O SENSOR/ROBÔ RECEPTOR
+        ctx.fillStyle = '#ff007f';
+        ctx.shadowBlur = 10;
+        ctx.shadowColor = '#ff007f';
+        ctx.beginPath();
+        ctx.arc(450, 200, 25, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillStyle = '#fff';
+        ctx.fillText('SENSOR', 430, 204);
 
-        const x =
-            event.clientX /
-            window.innerWidth *
-            100;
+        // 4. DESENHAR E MOVER FÓTONS (FEIXE DE LUZ)
+        for (let i = 0; i < photons.length; i++) {
+            let p = photons[i];
 
-        const y =
-            event.clientY /
-            window.innerHeight *
-            100;
+            ctx.fillStyle = `hsl(${laserHue}, 100%, 60%)`;
+            ctx.shadowBlur = 10;
+            ctx.shadowColor = `hsl(${laserHue}, 100%, 50%)`;
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+            ctx.fill();
 
+            // Lógica de colisão com o espelho
+            if (p.x >= 245 && !p.reflected) {
+                p.reflected = true;
+                // Altera trajetória baseada no ângulo do espelho
+                p.speedY = (mirrorAngle / 10);
+            }
 
-        document.body.style.setProperty(
-            "--mouse-x",
-            `${x}%`
-        );
+            p.x += p.speedX;
+            p.y += p.speedY;
+        }
 
+        // Remover fótons fora da tela
+        photons = photons.filter(p => p.x < canvas.width && p.y > 0 && p.y < canvas.height);
 
-        document.body.style.setProperty(
-            "--mouse-y",
-            `${y}%`
-        );
-
+        requestAnimationFrame(animate);
     }
-);
 
-
-/* =========================================================
-   MENSAGEM INICIAL
-========================================================= */
-
-console.log(
-    "⚡ OPTIBOT ONLINE"
-);
-
-console.log(
-    "🤖 Robótica carregada"
-);
-
-console.log(
-    "💻 Programação carregada"
-);
-
-console.log(
-    "🔬 Óptica carregada"
-);
+    // Iniciar a animação
+    animate();
+});
