@@ -1,118 +1,72 @@
-/* =========================================
+/* =========================================================
    OPTIBOT
    JAVASCRIPT
-========================================= */
+========================================================= */
 
 
-/* =========================================
-   PARTÍCULAS
-========================================= */
+/* =========================================================
+   MENU MOBILE
+========================================================= */
 
-const canvas = document.getElementById("particles");
-const ctx = canvas.getContext("2d");
+const menuButton =
+    document.getElementById("menuButton");
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-
-let particles = [];
-
-for (let i = 0; i < 100; i++) {
-
-    particles.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-
-        size: Math.random() * 2 + 0.5,
-
-        speedX: (Math.random() - 0.5) * 0.5,
-        speedY: (Math.random() - 0.5) * 0.5
-    });
-}
+const navigation =
+    document.querySelector(".navigation");
 
 
-function drawParticles() {
+menuButton.addEventListener("click", () => {
 
-    ctx.clearRect(
-        0,
-        0,
-        canvas.width,
-        canvas.height
-    );
-
-    particles.forEach(p => {
-
-        p.x += p.speedX;
-        p.y += p.speedY;
-
-
-        if (p.x < 0 || p.x > canvas.width) {
-            p.speedX *= -1;
-        }
-
-        if (p.y < 0 || p.y > canvas.height) {
-            p.speedY *= -1;
-        }
-
-
-        ctx.beginPath();
-
-        ctx.arc(
-            p.x,
-            p.y,
-            p.size,
-            0,
-            Math.PI * 2
-        );
-
-        ctx.fillStyle = "rgba(0,217,255,0.7)";
-
-        ctx.fill();
-    });
-
-    requestAnimationFrame(drawParticles);
-}
-
-drawParticles();
-
-
-window.addEventListener("resize", () => {
-
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    navigation.classList.toggle("mobile-open");
 
 });
 
 
-/* =========================================
-   MODO NEON / LIGHT
-========================================= */
+/* =========================================================
+   EXECUTAR CÓDIGO
+========================================================= */
 
-const modeButton =
-    document.getElementById("modeButton");
+const runCode =
+    document.getElementById("runCode");
 
-modeButton.addEventListener("click", () => {
 
-    document.body.classList.toggle("light-mode");
+runCode.addEventListener("click", () => {
 
-    if (
-        document.body.classList.contains("light-mode")
-    ) {
+    runCode.innerText =
+        "⚡ ROBÔ EXECUTANDO...";
 
-        modeButton.textContent =
-            "🌙 MODO ESCURO";
 
-    } else {
+    runCode.style.background =
+        "linear-gradient(90deg,#ff0077,#ffe600)";
 
-        modeButton.textContent =
-            "✨ MODO NEON";
-    }
+
+    setTimeout(() => {
+
+        runCode.innerText =
+            "✓ CÓDIGO EXECUTADO!";
+
+        runCode.style.background =
+            "linear-gradient(90deg,#00ff9d,#00eaff)";
+
+    }, 1500);
+
+
+    setTimeout(() => {
+
+        runCode.innerText =
+            "▶ EXECUTAR CÓDIGO";
+
+        runCode.style.background =
+            "linear-gradient(90deg,#00eaff,#00ff9d)";
+
+    }, 4000);
 
 });
 
 
-/* =========================================
+/* =========================================================
    LABORATÓRIO ÓPTICO
-========================================= */
+========================================================= */
 
 const angleSlider =
     document.getElementById("angleSlider");
@@ -120,511 +74,189 @@ const angleSlider =
 const angleValue =
     document.getElementById("angleValue");
 
-const incidence =
-    document.getElementById("incidence");
-
-const reflection =
-    document.getElementById("reflection");
-
 const mirror =
     document.getElementById("mirror");
 
-const laserBeam =
-    document.getElementById("laserBeam");
+const beam =
+    document.getElementById("beam");
 
-const laserButton =
-    document.getElementById("laserButton");
+const labButton =
+    document.getElementById("labButton");
 
-
-let laserActive = true;
+const labStatus =
+    document.getElementById("labStatus");
 
 
 angleSlider.addEventListener("input", () => {
 
-    const angle = angleSlider.value;
+    const angle =
+        angleSlider.value;
 
-    angleValue.textContent = angle;
 
-    incidence.textContent = angle + "°";
-
-    reflection.textContent = angle + "°";
+    angleValue.innerText =
+        `${45 + Number(angle)}°`;
 
 
     mirror.style.transform =
-        `rotate(${angle - 45}deg)`;
+        `rotate(${angle}deg)`;
 
 
-    const beamAngle =
-        (angle - 45) * -1;
-
-
-    laserBeam.style.transform =
-        `rotate(${beamAngle / 2}deg)`;
+    beam.style.transform =
+        `rotate(${angle / 3}deg)`;
 
 });
 
 
-laserButton.addEventListener("click", () => {
+labButton.addEventListener("click", () => {
 
-    laserActive = !laserActive;
+    labStatus.innerText =
+        "PROCESSANDO...";
 
 
-    if (laserActive) {
+    labButton.innerText =
+        "🔬 ANALISANDO LUZ";
 
-        laserBeam.style.opacity = "1";
 
-        laserButton.textContent =
-            "⚡ DESATIVAR LASER";
+    setTimeout(() => {
 
-    } else {
+        labStatus.innerText =
+            "EXPERIMENTO OK";
 
-        laserBeam.style.opacity = "0";
+        labStatus.style.color =
+            "#00ff9d";
 
-        laserButton.textContent =
-            "⚡ ATIVAR LASER";
-    }
+
+        labButton.innerText =
+            "✓ EXPERIMENTO CONCLUÍDO";
+
+    }, 1800);
+
+
+    setTimeout(() => {
+
+        labButton.innerText =
+            "⚡ ATIVAR EXPERIMENTO";
+
+    }, 4000);
 
 });
 
 
-/* =========================================
-   PROGRAMAÇÃO DO ROBÔ
-========================================= */
-
-const runCode =
-    document.getElementById("runCode");
-
-const consoleOutput =
-    document.getElementById("consoleOutput");
-
-
-runCode.addEventListener("click", () => {
-
-    consoleOutput.innerHTML = `
-        <p>> Inicializando OPTIBOT...</p>
-        <p>> Conectando sensores ópticos...</p>
-        <p>> Sensor de luz: OK</p>
-        <p>> Laser: ATIVO</p>
-        <p>> Obstáculos: ANALISANDO</p>
-        <p>> Movimento: 90°</p>
-        <p style="color:#00ff9d;">
-            > PROGRAMA EXECUTADO COM SUCESSO ✓
-        </p>
-    `;
-
-
-    const robot =
-        document.querySelector(".mini-robot");
-
-    robot.style.animation =
-        "robotFloat 0.4s infinite";
-
-
-    setTimeout(() => {
-
-        robot.style.transform =
-            "rotate(5deg)";
-
-    }, 300);
-
-
-    setTimeout(() => {
-
-        robot.style.transform =
-            "rotate(-5deg)";
-
-    }, 600);
-
-
-    setTimeout(() => {
-
-        robot.style.transform =
-            "rotate(0deg)";
-
-    }, 900);
-
-});
-
-
-/* =========================================
+/* =========================================================
    QUIZ
-========================================= */
+========================================================= */
 
-const questions = [
+const answers =
+    document.querySelectorAll(".answers button");
 
-    {
-        question:
-            "Qual área estuda o comportamento da luz?",
+const result =
+    document.getElementById("quizResult");
 
-        answers: [
-            "Robótica",
-            "Óptica",
-            "Programação",
-            "Mecânica"
-        ],
+const progress =
+    document.getElementById("progress");
 
-        correct: 1
-    },
-
-
-    {
-        question:
-            "Qual elemento permite que um robô perceba o ambiente?",
-
-        answers: [
-            "Sensor",
-            "Parafuso",
-            "Bateria",
-            "Carcaça"
-        ],
-
-        correct: 0
-    },
-
-
-    {
-        question:
-            "Qual linguagem é usada neste projeto para criar interações?",
-
-        answers: [
-            "HTML",
-            "CSS",
-            "JavaScript",
-            "SQL"
-        ],
-
-        correct: 2
-    },
-
-
-    {
-        question:
-            "Quando a luz bate em uma superfície e retorna, temos:",
-
-        answers: [
-            "Combustão",
-            "Reflexão",
-            "Eletrização",
-            "Magnetismo"
-        ],
-
-        correct: 1
-    },
-
-
-    {
-        question:
-            "Qual combinação representa o projeto OPTIBOT?",
-
-        answers: [
-            "Química + História + Música",
-            "Matemática + Arte + História",
-            "Robótica + Programação + Óptica",
-            "Geografia + Biologia + Literatura"
-        ],
-
-        correct: 2
-    }
-
-];
-
-
-let currentQuestion = 0;
 
 let score = 0;
 
-
-const questionElement =
-    document.getElementById("question");
-
-const answersElement =
-    document.getElementById("answers");
-
-const questionNumber =
-    document.getElementById("questionNumber");
-
-const progressBar =
-    document.getElementById("progressBar");
-
-const quizResult =
-    document.getElementById("quizResult");
+let answered = false;
 
 
-function loadQuestion() {
+answers.forEach(button => {
 
-    const question =
-        questions[currentQuestion];
+    button.addEventListener("click", () => {
 
+        if (answered) return;
 
-    questionElement.textContent =
-        question.question;
-
-
-    questionNumber.textContent =
-        currentQuestion + 1;
+        answered = true;
 
 
-    progressBar.style.width =
-        ((currentQuestion + 1) /
-            questions.length * 100) + "%";
+        const answer =
+            button.dataset.answer;
 
 
-    answersElement.innerHTML = "";
+        if (answer === "correct") {
 
+            score++;
 
-    question.answers.forEach(
-        (answer, index) => {
+            button.style.background =
+                "linear-gradient(90deg,#00ff9d,#00eaff)";
 
-            const button =
-                document.createElement("button");
+            button.style.color =
+                "#00100d";
 
-            button.textContent = answer;
+            result.innerText =
+                "✓ CORRETO! Programação transforma ideias em comandos.";
 
-
-            button.addEventListener(
-                "click",
-                () => checkAnswer(index)
-            );
-
-
-            answersElement.appendChild(button);
-
-        }
-    );
-
-}
-
-
-function checkAnswer(index) {
-
-    const question =
-        questions[currentQuestion];
-
-
-    const buttons =
-        answersElement.querySelectorAll("button");
-
-
-    buttons.forEach(button => {
-
-        button.disabled = true;
-
-    });
-
-
-    if (index === question.correct) {
-
-        score++;
-
-        quizResult.textContent =
-            "✅ CORRETO! Excelente!";
-
-        quizResult.style.color =
-            "#00ff9d";
-
-    } else {
-
-        quizResult.textContent =
-            "❌ Quase! Continue tentando!";
-
-        quizResult.style.color =
-            "#ff2bd6";
-    }
-
-
-    setTimeout(() => {
-
-        currentQuestion++;
-
-
-        if (
-            currentQuestion <
-            questions.length
-        ) {
-
-            quizResult.textContent = "";
-
-            loadQuestion();
+            result.style.color =
+                "#00ff9d";
 
         } else {
 
-            finishQuiz();
+            button.style.background =
+                "linear-gradient(90deg,#ff0077,#8b00ff)";
+
+            result.innerText =
+                "✕ Quase! Tente novamente na próxima.";
+
+            result.style.color =
+                "#ff0077";
 
         }
 
-    }, 1200);
 
-}
-
-
-function finishQuiz() {
-
-    questionElement.innerHTML =
-        `🏆 DESAFIO FINALIZADO!<br><br>
-        Você acertou ${score} de ${questions.length}.`;
+        progress.style.width =
+            "100%";
 
 
-    answersElement.innerHTML = `
+        setTimeout(() => {
 
-        <button onclick="restartQuiz()">
-            🔄 JOGAR NOVAMENTE
-        </button>
+            answers.forEach(btn => {
 
-    `;
+                btn.style.background =
+                    "";
 
+                btn.style.color =
+                    "";
 
-    quizResult.textContent =
-        score === 5
-            ? "🚀 NÍVEL: ESPECIALISTA OPTIBOT!"
-            : "🤖 Continue explorando tecnologia!";
-
-}
+            });
 
 
-function restartQuiz() {
+            result.innerText =
+                "";
 
-    currentQuestion = 0;
+            progress.style.width =
+                "25%";
 
-    score = 0;
+            answered = false;
 
-    quizResult.textContent = "";
+        }, 2500);
 
-    loadQuestion();
-
-}
-
-
-loadQuestion();
-
-
-/* =========================================
-   BOTÃO SURPRESA
-========================================= */
-
-const surpriseButton =
-    document.getElementById("surpriseButton");
-
-
-surpriseButton.addEventListener("click", () => {
-
-    for (let i = 0; i < 40; i++) {
-
-        createConfetti();
-
-    }
+    });
 
 });
 
 
-function createConfetti() {
+/* =========================================================
+   ANIMAÇÃO AO ROLAR
+========================================================= */
 
-    const confetti =
-        document.createElement("div");
+const animatedElements =
+    document.querySelectorAll(
+        ".technology-section, .flow-card, .quiz-box"
+    );
 
-
-    confetti.style.position =
-        "fixed";
-
-    confetti.style.width =
-        "8px";
-
-    confetti.style.height =
-        "8px";
-
-    confetti.style.background =
-        randomColor();
-
-    confetti.style.left =
-        Math.random() * 100 + "vw";
-
-    confetti.style.top =
-        "-10px";
-
-    confetti.style.zIndex =
-        "9999";
-
-    confetti.style.borderRadius =
-        "2px";
-
-
-    document.body.appendChild(confetti);
-
-
-    const animation =
-        confetti.animate(
-
-            [
-                {
-                    transform:
-                        "translateY(0) rotate(0deg)"
-                },
-
-                {
-                    transform:
-                        `translateY(110vh)
-                         rotate(${Math.random() * 720}deg)`
-                }
-            ],
-
-            {
-                duration:
-                    Math.random() * 2000 + 2000,
-
-                easing: "ease-in"
-            }
-
-        );
-
-
-    animation.onfinish = () => {
-
-        confetti.remove();
-
-    };
-
-}
-
-
-function randomColor() {
-
-    const colors = [
-
-        "#ff2bd6",
-        "#00d9ff",
-        "#00ff9d",
-        "#ffe600",
-        "#8b5cf6",
-        "#ff7b00"
-
-    ];
-
-    return colors[
-        Math.floor(
-            Math.random() * colors.length
-        )
-    ];
-
-}
-
-
-/* =========================================
-   ANIMAÇÃO AO ENTRAR NAS SEÇÕES
-========================================= */
 
 const observer =
     new IntersectionObserver(
-
         entries => {
 
             entries.forEach(entry => {
 
                 if (entry.isIntersecting) {
 
-                    entry.target.style.opacity =
-                        "1";
-
-                    entry.target.style.transform =
-                        "translateY(0)";
+                    entry.target.classList.add(
+                        "visible"
+                    );
 
                 }
 
@@ -639,18 +271,94 @@ const observer =
     );
 
 
-document
-    .querySelectorAll(".tech-card, .flow-item, .quiz-card")
-    .forEach(element => {
+animatedElements.forEach(element => {
 
-        element.style.opacity = "0";
+    observer.observe(element);
 
-        element.style.transform =
-            "translateY(30px)";
+});
 
-        element.style.transition =
-            "0.7s ease";
 
-        observer.observe(element);
+/* =========================================================
+   EFEITO DO HEADER AO ROLAR
+========================================================= */
 
-    });
+const header =
+    document.querySelector(".header");
+
+
+window.addEventListener("scroll", () => {
+
+    if (window.scrollY > 50) {
+
+        header.style.background =
+            "rgba(2,1,8,.9)";
+
+        header.style.boxShadow =
+            "0 10px 40px rgba(0,0,0,.3)";
+
+    } else {
+
+        header.style.background =
+            "rgba(5,2,13,.65)";
+
+        header.style.boxShadow =
+            "none";
+
+    }
+
+});
+
+
+/* =========================================================
+   CURSOR / BRILHO
+========================================================= */
+
+document.addEventListener(
+    "mousemove",
+    event => {
+
+        const x =
+            event.clientX /
+            window.innerWidth *
+            100;
+
+        const y =
+            event.clientY /
+            window.innerHeight *
+            100;
+
+
+        document.body.style.setProperty(
+            "--mouse-x",
+            `${x}%`
+        );
+
+
+        document.body.style.setProperty(
+            "--mouse-y",
+            `${y}%`
+        );
+
+    }
+);
+
+
+/* =========================================================
+   MENSAGEM INICIAL
+========================================================= */
+
+console.log(
+    "⚡ OPTIBOT ONLINE"
+);
+
+console.log(
+    "🤖 Robótica carregada"
+);
+
+console.log(
+    "💻 Programação carregada"
+);
+
+console.log(
+    "🔬 Óptica carregada"
+);

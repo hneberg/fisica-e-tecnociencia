@@ -1,343 +1,239 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>OPTIBOT | Robótica + Programação + Óptica</title>
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-    <link rel="stylesheet" href="style.css">
+    <meta
+        name="description"
+        content="OptiBot — Robótica, Programação e Óptica conectadas."
+    >
+
+    <title>OptiBot | Tecnologia que conecta</title>
+
+    <!-- FONTES -->
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- CSS -->
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
 </head>
+
 
 <body>
 
-    <!-- FUNDO -->
-    <canvas id="particles"></canvas>
+    <!-- =====================================================
+         FUNDO
+    ====================================================== -->
 
-    <!-- NAVEGAÇÃO -->
-    <header class="navbar">
+    <div class="background">
 
-        <div class="logo">
-            <span class="logo-icon">◈</span>
+        <div class="blob blob-1"></div>
+
+        <div class="blob blob-2"></div>
+
+        <div class="blob blob-3"></div>
+
+        <div class="grid"></div>
+
+    </div>
+
+
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
+
+    <header class="header">
+
+        <a
+            href="#inicio"
+            class="logo"
+        >
+
+            <span class="logo-symbol">◈</span>
+
             OPTI<span>BOT</span>
-        </div>
 
-        <nav>
+        </a>
+
+
+        <nav class="navigation">
+
             <a href="#inicio">Início</a>
-            <a href="#tecnologias">Tecnologias</a>
-            <a href="#laboratorio">Laboratório</a>
+
+            <a href="#robotica">Robótica</a>
+
             <a href="#programacao">Programação</a>
-            <a href="#quiz">Desafio</a>
+
+            <a href="#optica">Óptica</a>
+
+            <a href="#laboratorio">Laboratório</a>
+
         </nav>
 
-        <button class="mode-button" id="modeButton">
-            ✨ MODO NEON
+
+        <button
+            class="menu-button"
+            id="menuButton"
+        >
+
+            ☰
+
         </button>
 
     </header>
 
 
-    <!-- HERO -->
+
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
+
     <main>
 
-        <section class="hero" id="inicio">
 
-            <div class="hero-text">
+        <!-- =================================================
+             HERO
+        ================================================== -->
 
-                <div class="tag">
-                    🚀 TECNOLOGIA DO FUTURO
-                </div>
+        <section
+            class="hero"
+            id="inicio"
+        >
+
+            <div class="hero-content">
+
+                <span class="hero-tag">
+                    ⚡ PROJETO DE TECNOLOGIA
+                </span>
+
 
                 <h1>
-                    QUANDO A
-                    <span>LUZ</span>
-                    ENCONTRA O
-                    <span>ROBÔ</span>
+
+                    O FUTURO
+
+                    <br>
+
+                    <span>É CONECTADO.</span>
+
                 </h1>
 
+
                 <p>
-                    Uma experiência interativa que conecta
-                    <strong>Robótica</strong>,
-                    <strong>Programação</strong> e
-                    <strong>Óptica</strong>
-                    em um único projeto.
+
+                    Onde a <strong>robótica</strong>,
+                    a <strong>programação</strong> e a
+                    <strong>óptica</strong> se encontram,
+                    novas possibilidades começam.
+
                 </p>
+
 
                 <div class="hero-buttons">
 
-                    <a href="#laboratorio" class="primary-button">
-                        EXPLORAR LABORATÓRIO 🚀
-                    </a>
-
-                    <a href="#tecnologias" class="secondary-button">
-                        COMO FUNCIONA?
-                    </a>
-
-                </div>
-
-            </div>
-
-
-            <!-- ROBÔ -->
-            <div class="robot-container">
-
-                <div class="robot-glow"></div>
-
-                <div class="robot">
-
-                    <div class="robot-head">
-
-                        <div class="antenna"></div>
-
-                        <div class="eyes">
-                            <span></span>
-                            <span></span>
-                        </div>
-
-                        <div class="robot-mouth"></div>
-
-                    </div>
-
-                    <div class="robot-body">
-
-                        <div class="screen">
-                            <span>OPTIBOT</span>
-                            <small>ONLINE</small>
-                        </div>
-
-                        <div class="robot-light"></div>
-
-                    </div>
-
-                    <div class="robot-arm left-arm">
-                        <div class="joint"></div>
-                        <div class="arm-piece"></div>
-                    </div>
-
-                    <div class="robot-arm right-arm">
-                        <div class="joint"></div>
-                        <div class="arm-piece"></div>
-                    </div>
-
-                    <div class="robot-leg left-leg"></div>
-                    <div class="robot-leg right-leg"></div>
-
-                </div>
-
-                <div class="robot-status">
-                    <span class="status-dot"></span>
-                    SISTEMA OPERACIONAL
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- TECNOLOGIAS -->
-        <section class="section" id="tecnologias">
-
-            <div class="section-title">
-
-                <span>01 — TECNOLOGIAS</span>
-
-                <h2>
-                    TRÊS ÁREAS.
-                    <strong>UM FUTURO.</strong>
-                </h2>
-
-                <p>
-                    Descubra como diferentes áreas da ciência e tecnologia
-                    podem trabalhar juntas.
-                </p>
-
-            </div>
-
-
-            <div class="cards">
-
-                <article class="tech-card robotics">
-
-                    <div class="card-number">01</div>
-
-                    <div class="card-icon">🤖</div>
-
-                    <h3>ROBÓTICA</h3>
-
-                    <p>
-                        Cria máquinas capazes de perceber o ambiente,
-                        tomar decisões e executar movimentos.
-                    </p>
-
-                    <div class="card-line"></div>
-
-                    <span class="card-tag">MOVIMENTO + SENSORES</span>
-
-                </article>
-
-
-                <article class="tech-card programming">
-
-                    <div class="card-number">02</div>
-
-                    <div class="card-icon">💻</div>
-
-                    <h3>PROGRAMAÇÃO</h3>
-
-                    <p>
-                        Transforma ideias em instruções que controlam
-                        sistemas, sensores e máquinas.
-                    </p>
-
-                    <div class="card-line"></div>
-
-                    <span class="card-tag">LÓGICA + CÓDIGO</span>
-
-                </article>
-
-
-                <article class="tech-card optics">
-
-                    <div class="card-number">03</div>
-
-                    <div class="card-icon">🔦</div>
-
-                    <h3>ÓPTICA</h3>
-
-                    <p>
-                        Estuda a luz e seus fenômenos, como reflexão,
-                        refração e propagação.
-                    </p>
-
-                    <div class="card-line"></div>
-
-                    <span class="card-tag">LUZ + FÍSICA</span>
-
-                </article>
-
-            </div>
-
-
-            <div class="connection">
-
-                <div class="connection-line"></div>
-
-                <div class="connection-text">
-                    ROBÓTICA
-                    <span>+</span>
-                    PROGRAMAÇÃO
-                    <span>+</span>
-                    ÓPTICA
-                    <b>=</b>
-                    INOVAÇÃO
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- LABORATÓRIO -->
-        <section class="section laboratory" id="laboratorio">
-
-            <div class="section-title">
-
-                <span>02 — LABORATÓRIO ÓPTICO</span>
-
-                <h2>
-                    CONTROLE A
-                    <strong>LUZ</strong>
-                </h2>
-
-                <p>
-                    Mova o espelho e observe como o ângulo do feixe de luz muda.
-                </p>
-
-            </div>
-
-
-            <div class="lab-container">
-
-                <div class="lab-screen">
-
-                    <div class="laser-source">
-
-                        <div class="laser-button"></div>
-
-                        <span>LASER</span>
-
-                    </div>
-
-
-                    <div class="laser-beam" id="laserBeam"></div>
-
-                    <div class="mirror" id="mirror">
-
-                        <div class="mirror-shine"></div>
-
-                    </div>
-
-
-                    <div class="target">
-
-                        <div class="target-center"></div>
-
-                    </div>
-
-
-                    <div class="lab-grid"></div>
-
-                </div>
-
-
-                <div class="lab-controls">
-
-                    <h3>PAINEL DE CONTROLE</h3>
-
-                    <p>Ângulo do espelho</p>
-
-                    <div class="angle-value">
-                        <span id="angleValue">45</span>°
-                    </div>
-
-                    <input
-                        type="range"
-                        id="angleSlider"
-                        min="15"
-                        max="75"
-                        value="45"
+                    <a
+                        href="#robotica"
+                        class="button primary"
                     >
 
-                    <div class="slider-labels">
-                        <span>15°</span>
-                        <span>45°</span>
-                        <span>75°</span>
+                        EXPLORAR PROJETO
+
+                    </a>
+
+
+                    <a
+                        href="#laboratorio"
+                        class="button secondary"
+                    >
+
+                        ABRIR LABORATÓRIO
+
+                    </a>
+
+                </div>
+
+
+                <div class="hero-stats">
+
+                    <div>
+
+                        <strong>03</strong>
+
+                        <span>ÁREAS</span>
+
                     </div>
 
 
-                    <div class="physics-info">
+                    <div>
 
-                        <div>
-                            <span>INCIDÊNCIA</span>
-                            <strong id="incidence">45°</strong>
-                        </div>
+                        <strong>∞</strong>
 
-                        <div>
-                            <span>REFLEXÃO</span>
-                            <strong id="reflection">45°</strong>
-                        </div>
+                        <span>POSSIBILIDADES</span>
 
                     </div>
 
 
-                    <button class="action-button" id="laserButton">
-                        ⚡ ATIVAR LASER
-                    </button>
+                    <div>
+
+                        <strong>01</strong>
+
+                        <span>CONEXÃO</span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- IMAGEM ROBÓTICA -->
+
+            <div class="hero-image">
+
+                <div class="image-frame">
+
+                    <img
+                        src="https://commons.wikimedia.org/wiki/Special:Redirect/file/University_of_Washington_-_Bill_and_Melinda_Gates_Center_for_CSE_-_robotics_lab_04.jpg"
+                        alt="Robô em laboratório de robótica"
+                    >
+
+                    <div class="image-overlay"></div>
+
+                    <div class="floating-label label-one">
+
+                        🤖 ROBÓTICA
+
+                    </div>
+
+
+                    <div class="floating-label label-two">
+
+                        AI + SENSORES
+
+                    </div>
+
+
+                    <div class="floating-label label-three">
+
+                        ● ONLINE
+
+                    </div>
 
                 </div>
 
@@ -346,301 +242,779 @@
         </section>
 
 
-        <!-- PROGRAMAÇÃO -->
-        <section class="section programming-section" id="programacao">
 
-            <div class="section-title">
+        <!-- =================================================
+             INTRO
+        ================================================== -->
 
-                <span>03 — CENTRAL DE PROGRAMAÇÃO</span>
+        <section class="intro">
 
-                <h2>
-                    PROGRAME O
-                    <strong>ROBÔ</strong>
-                </h2>
+            <span class="section-label">
+                01 / A IDEIA
+            </span>
 
-                <p>
-                    Escolha uma instrução e veja o robô responder.
-                </p>
+
+            <h2>
+
+                Três tecnologias.
+
+                <span>Uma experiência.</span>
+
+            </h2>
+
+
+            <p>
+
+                A OptiBot mostra como diferentes áreas da
+                tecnologia podem trabalhar juntas para criar
+                sistemas inteligentes, automáticos e capazes
+                de interagir com o mundo.
+
+            </p>
+
+        </section>
+
+
+
+        <!-- =================================================
+             ROBÓTICA
+        ================================================== -->
+
+        <section
+            class="technology-section robotics-section"
+            id="robotica"
+        >
+
+            <div class="technology-image">
+
+                <img
+                    src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Dobot_Magician_in_Robotics_Laboratory_03.jpg"
+                    alt="Braço robótico em laboratório"
+                >
+
+                <div class="image-number">
+                    01
+                </div>
 
             </div>
 
 
-            <div class="code-area">
+            <article class="technology-content">
 
-                <div class="terminal">
+                <span class="technology-label">
+                    🤖 ROBÓTICA
+                </span>
 
-                    <div class="terminal-top">
 
-                        <div class="terminal-dots">
+                <h2>
+
+                    Máquinas que
+
+                    <span>pensam e agem.</span>
+
+                </h2>
+
+
+                <p>
+
+                    A robótica combina componentes mecânicos,
+                    eletrônica, sensores e programação para
+                    criar máquinas capazes de executar ações
+                    automaticamente.
+
+                </p>
+
+
+                <div class="feature-grid">
+
+                    <div class="feature">
+
+                        <span>01</span>
+
+                        <h3>SENSORES</h3>
+
+                        <p>
+                            Percebem informações do ambiente.
+                        </p>
+
+                    </div>
+
+
+                    <div class="feature">
+
+                        <span>02</span>
+
+                        <h3>MOTORES</h3>
+
+                        <p>
+                            Transformam comandos em movimento.
+                        </p>
+
+                    </div>
+
+
+                    <div class="feature">
+
+                        <span>03</span>
+
+                        <h3>CONTROLE</h3>
+
+                        <p>
+                            Coordena todas as ações do robô.
+                        </p>
+
+                    </div>
+
+
+                    <div class="feature">
+
+                        <span>04</span>
+
+                        <h3>AUTOMAÇÃO</h3>
+
+                        <p>
+                            Faz o sistema agir sozinho.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+        </section>
+
+
+
+        <!-- =================================================
+             PROGRAMAÇÃO
+        ================================================== -->
+
+        <section
+            class="technology-section programming-section"
+            id="programacao"
+        >
+
+            <article class="technology-content">
+
+                <span class="technology-label">
+                    💻 PROGRAMAÇÃO
+                </span>
+
+
+                <h2>
+
+                    Ideias transformadas
+
+                    <span>em comandos.</span>
+
+                </h2>
+
+
+                <p>
+
+                    A programação é responsável por transformar
+                    uma ideia em instruções que podem ser
+                    interpretadas por computadores,
+                    microcontroladores e robôs.
+
+                </p>
+
+
+                <div class="code-window">
+
+                    <div class="code-header">
+
+                        <div class="dots">
+
                             <i></i>
                             <i></i>
                             <i></i>
+
                         </div>
 
-                        <span>optibot.js</span>
+                        <span>
+                            optibot.js
+                        </span>
 
                     </div>
 
 
                     <div class="code">
 
-                        <div>
-                            <span class="line-number">01</span>
+                        <p>
                             <span class="purple">const</span>
                             <span class="blue">robot</span>
                             =
-                            <span class="yellow">OPTIBOT</span>;
-                        </div>
+                            <span class="yellow">OptiBot</span>();
+                        </p>
 
-                        <div>
-                            <span class="line-number">02</span>
-                        </div>
 
-                        <div>
-                            <span class="line-number">03</span>
+                        <p>
                             <span class="purple">function</span>
-                            <span class="green">executar</span>() {
-                        </div>
+                            <span class="green">explore</span>() {
+                        </p>
 
-                        <div>
-                            <span class="line-number">04</span>
-                            &nbsp;&nbsp;robot.
-                            <span class="orange">acenderLaser</span>();
-                        </div>
 
-                        <div>
-                            <span class="line-number">05</span>
-                            &nbsp;&nbsp;robot.
-                            <span class="orange">detectarObstaculo</span>();
-                        </div>
+                        <p class="indent">
+                            robot.<span class="orange">readSensor</span>();
+                        </p>
 
-                        <div>
-                            <span class="line-number">06</span>
-                            &nbsp;&nbsp;robot.
-                            <span class="orange">mover</span>(<span class="yellow">90</span>);
-                        </div>
 
-                        <div>
-                            <span class="line-number">07</span>
+                        <p class="indent">
+                            robot.<span class="orange">analyzeLight</span>();
+                        </p>
+
+
+                        <p class="indent">
+                            robot.<span class="orange">move</span>();
+                        </p>
+
+
+                        <p>
                             }
-                        </div>
+                        </p>
+
+                    </div>
+
+
+                    <button
+                        id="runCode"
+                        class="run-code"
+                    >
+
+                        ▶ EXECUTAR CÓDIGO
+
+                    </button>
+
+                </div>
+
+            </article>
+
+
+            <div class="programming-image">
+
+                <img
+                    src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Programming.jpg"
+                    alt="Código de programação em uma tela"
+                >
+
+                <div class="programming-glow"></div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             ÓPTICA
+        ================================================== -->
+
+        <section
+            class="technology-section optics-section"
+            id="optica"
+        >
+
+            <div class="optics-image">
+
+                <img
+                    src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Laser_Experiment_1_(102188773).jpeg"
+                    alt="Experimento óptico com laser"
+                >
+
+                <div class="laser-line"></div>
+
+                <div class="optics-badge">
+
+                    🔴 LASER
+
+                </div>
+
+            </div>
+
+
+            <article class="technology-content">
+
+                <span class="technology-label">
+                    🔬 ÓPTICA
+                </span>
+
+
+                <h2>
+
+                    A luz também
+
+                    <span>pode ser informação.</span>
+
+                </h2>
+
+
+                <p>
+
+                    A óptica estuda a luz e seus fenômenos.
+                    Em sistemas tecnológicos, ela pode ser
+                    utilizada em sensores, comunicação,
+                    câmeras, leitores e sistemas de medição.
+
+                </p>
+
+
+                <div class="light-cards">
+
+                    <div>
+
+                        <strong>↗</strong>
+
+                        <h3>REFLEXÃO</h3>
+
+                        <p>
+                            A luz muda sua direção ao atingir
+                            uma superfície.
+                        </p>
+
+                    </div>
+
+
+                    <div>
+
+                        <strong>◎</strong>
+
+                        <h3>LASER</h3>
+
+                        <p>
+                            Uma fonte de luz extremamente
+                            direcionada.
+                        </p>
+
+                    </div>
+
+
+                    <div>
+
+                        <strong>◉</strong>
+
+                        <h3>SENSORES</h3>
+
+                        <p>
+                            Transformam luz em informações
+                            que podem ser processadas.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+        </section>
+
+
+
+        <!-- =================================================
+             CONEXÃO
+        ================================================== -->
+
+        <section class="connection">
+
+            <span class="section-label">
+                04 / A CONEXÃO
+            </span>
+
+
+            <h2>
+
+                Quando as três áreas
+
+                <span>trabalham juntas.</span>
+
+            </h2>
+
+
+            <div class="connection-flow">
+
+                <div class="flow-card robotics-flow">
+
+                    <span>🤖</span>
+
+                    <h3>ROBÓTICA</h3>
+
+                    <p>
+                        Executa ações.
+                    </p>
+
+                </div>
+
+
+                <div class="flow-arrow">
+                    →
+                </div>
+
+
+                <div class="flow-card programming-flow">
+
+                    <span>💻</span>
+
+                    <h3>PROGRAMAÇÃO</h3>
+
+                    <p>
+                        Cria os comandos.
+                    </p>
+
+                </div>
+
+
+                <div class="flow-arrow">
+                    →
+                </div>
+
+
+                <div class="flow-card optics-flow">
+
+                    <span>🔬</span>
+
+                    <h3>ÓPTICA</h3>
+
+                    <p>
+                        Fornece informações.
+                    </p>
+
+                </div>
+
+
+                <div class="flow-arrow">
+                    →
+                </div>
+
+
+                <div class="flow-card result-flow">
+
+                    <span>⚡</span>
+
+                    <h3>INOVAÇÃO</h3>
+
+                    <p>
+                        Tudo conectado.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             LABORATÓRIO INTERATIVO
+        ================================================== -->
+
+        <section
+            class="laboratory"
+            id="laboratorio"
+        >
+
+            <div class="laboratory-title">
+
+                <span class="section-label">
+                    05 / LABORATÓRIO
+                </span>
+
+
+                <h2>
+
+                    Controle o
+
+                    <span>experimento.</span>
+
+                </h2>
+
+
+                <p>
+
+                    Altere o ângulo do espelho e observe
+                    a simulação do feixe de luz.
+
+                </p>
+
+            </div>
+
+
+            <div class="lab">
+
+                <div class="lab-screen">
+
+                    <div class="lab-grid"></div>
+
+
+                    <div class="laser-source">
+
+                        <span>LASER</span>
+
+                    </div>
+
+
+                    <div
+                        class="beam"
+                        id="beam"
+                    ></div>
+
+
+                    <div
+                        class="mirror"
+                        id="mirror"
+                    ></div>
+
+
+                    <div class="target">
+
+                        <span>ALVO</span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="lab-control">
+
+                    <span>ÂNGULO DO ESPELHO</span>
+
+
+                    <strong id="angleValue">
+                        45°
+                    </strong>
+
+
+                    <input
+                        type="range"
+                        min="-45"
+                        max="45"
+                        value="0"
+                        id="angleSlider"
+                    >
+
+
+                    <div class="lab-info">
 
                         <div>
-                            <span class="line-number">08</span>
-                            <span class="green">executar</span>();
+
+                            <span>STATUS</span>
+
+                            <strong id="labStatus">
+                                ATIVO
+                            </strong>
+
+                        </div>
+
+
+                        <div>
+
+                            <span>FEIXE</span>
+
+                            <strong>
+                                LASER
+                            </strong>
+
                         </div>
 
                     </div>
 
 
-                    <button id="runCode" class="run-button">
-                        ▶ EXECUTAR PROGRAMA
+                    <button
+                        id="labButton"
+                        class="lab-button"
+                    >
+
+                        ⚡ ATIVAR EXPERIMENTO
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             QUIZ
+        ================================================== -->
+
+        <section class="quiz">
+
+            <span class="section-label">
+                06 / DESAFIO
+            </span>
+
+
+            <h2>
+
+                Você entende
+
+                <span>tecnologia?</span>
+
+            </h2>
+
+
+            <div class="quiz-box">
+
+                <div class="quiz-progress">
+
+                    <div id="progress"></div>
+
+                </div>
+
+
+                <span id="questionNumber">
+                    PERGUNTA 1
+                </span>
+
+
+                <h3 id="question">
+                    Qual área é responsável por
+                    criar instruções para um computador?
+                </h3>
+
+
+                <div
+                    class="answers"
+                    id="answers"
+                >
+
+                    <button data-answer="wrong">
+                        Robótica
+                    </button>
+
+                    <button data-answer="correct">
+                        Programação
+                    </button>
+
+                    <button data-answer="wrong">
+                        Óptica
+                    </button>
+
+                    <button data-answer="wrong">
+                        Mecânica
                     </button>
 
                 </div>
 
 
-                <div class="robot-console">
-
-                    <div class="console-title">
-                        🤖 STATUS DO ROBÔ
-                    </div>
-
-                    <div class="console-robot">
-
-                        <div class="mini-robot">
-
-                            <div class="mini-head">
-                                <span></span>
-                                <span></span>
-                            </div>
-
-                            <div class="mini-body"></div>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="console-output" id="consoleOutput">
-
-                        <p>> Sistema iniciado...</p>
-
-                        <p>> Aguardando comando...</p>
-
-                    </div>
-
-                </div>
+                <div
+                    id="quizResult"
+                    class="quiz-result"
+                ></div>
 
             </div>
 
         </section>
 
 
-        <!-- COMO SE CONECTAM -->
-        <section class="section connection-section">
 
-            <div class="section-title">
+        <!-- =================================================
+             FINAL
+        ================================================== -->
 
-                <span>04 — A CONEXÃO</span>
-
-                <h2>
-                    COMO TUDO
-                    <strong>SE CONECTA?</strong>
-                </h2>
-
-            </div>
-
-
-            <div class="flow">
-
-                <div class="flow-item">
-
-                    <div class="flow-icon">🔦</div>
-
-                    <h3>LUZ</h3>
-
-                    <p>
-                        Sensores ópticos detectam informações do ambiente.
-                    </p>
-
-                </div>
-
-
-                <div class="flow-arrow">→</div>
-
-
-                <div class="flow-item">
-
-                    <div class="flow-icon">💻</div>
-
-                    <h3>PROGRAMAÇÃO</h3>
-
-                    <p>
-                        O programa interpreta os dados recebidos.
-                    </p>
-
-                </div>
-
-
-                <div class="flow-arrow">→</div>
-
-
-                <div class="flow-item">
-
-                    <div class="flow-icon">🤖</div>
-
-                    <h3>ROBÓTICA</h3>
-
-                    <p>
-                        O robô executa uma ação de acordo com a informação.
-                    </p>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- QUIZ -->
-        <section class="section quiz-section" id="quiz">
-
-            <div class="section-title">
-
-                <span>05 — DESAFIO OPTIBOT</span>
-
-                <h2>
-                    TESTE SEU
-                    <strong>CONHECIMENTO</strong>
-                </h2>
-
-            </div>
-
-
-            <div class="quiz-card">
-
-                <div class="quiz-progress">
-
-                    <div id="progressBar"></div>
-
-                </div>
-
-
-                <div class="question-number">
-                    PERGUNTA <span id="questionNumber">1</span>/5
-                </div>
-
-
-                <h3 id="question">
-                    Qual área estuda o comportamento da luz?
-                </h3>
-
-
-                <div class="answers" id="answers">
-
-                    <button>Robótica</button>
-
-                    <button>Óptica</button>
-
-                    <button>Programação</button>
-
-                    <button>Mecânica</button>
-
-                </div>
-
-
-                <div class="quiz-result" id="quizResult"></div>
-
-            </div>
-
-        </section>
-
-
-        <!-- FINAL -->
-        <section class="final-section">
+        <section class="final">
 
             <div class="final-glow"></div>
 
-            <span>O FUTURO É INTERDISCIPLINAR</span>
+
+            <span>
+                OPTIBOT
+            </span>
+
 
             <h2>
-                IMAGINE.
-                <strong>PROGRAME.</strong>
-                TRANSFORME.
+
+                O futuro começa
+
+                <strong>
+                    quando as ideias se conectam.
+                </strong>
+
             </h2>
 
+
             <p>
+
                 Robótica + Programação + Óptica
+
             </p>
 
-            <button id="surpriseButton">
-                ✨ SURPRESA
-            </button>
+
+            <a
+                href="#inicio"
+                class="button primary"
+            >
+
+                VOLTAR AO INÍCIO ↑
+
+            </a>
 
         </section>
 
     </main>
 
 
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
     <footer>
 
         <div class="footer-logo">
-            OPTI<span>BOT</span>
+
+            ◈ OPTI<span>BOT</span>
+
         </div>
 
+
         <p>
-            Projeto educacional — Robótica • Programação • Óptica
+
+            Projeto educacional — Robótica,
+            Programação e Óptica.
+
         </p>
 
-        <p class="footer-small">
-            Desenvolvido para demonstrar a integração entre ciência e tecnologia.
+
+        <div class="credits">
+
+            <p>
+                Imagens: Wikimedia Commons
+            </p>
+
+            <p>
+                Robótica: Joe Mabel — CC BY-SA 4.0
+            </p>
+
+            <p>
+                Programação: Lorenzo Cafaro — CC0
+            </p>
+
+            <p>
+                Óptica: Omar Burgos Dattwyler — CC BY-SA 3.0
+            </p>
+
+        </div>
+
+
+        <p class="copyright">
+
+            © 2026 OPTIBOT — Projeto escolar
+
         </p>
 
     </footer>
 
 
+
+    <!-- JAVASCRIPT -->
+
     <script src="script.js"></script>
 
 </body>
+
 </html>
