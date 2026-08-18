@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OptoBot Studio | Robótica, Ótica & Programação</title>
+    <!-- Vinculando o arquivo CSS externo -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>Opto<span>Bot</span> Studio</h1>
+        <div class="tags">
+            <span class="tag">Ótica Avançada</span>
+            <span class="tag">Robótica</span>
+            <span class="tag">Programação C++/JS</span>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <!-- ÁREA DO SIMULADOR FÍSICO (CANVAS) -->
+        <div class="canvas-card">
+            <div class="canvas-header">
+                <span>Laboratório Virtual de Robótica Optoeletrônica</span>
+                <span id="status-badge">● Sistema Operacional</span>
+            </div>
+            <canvas id="simCanvas"></canvas>
+        </div>
+
+        <!-- PAINEL DE CONTROLE E TELEMETRIA -->
+        <div class="sidebar">
+            <!-- PAINEL DE ÓTICA -->
+            <div class="panel">
+                <h3>1. Parâmetros de Ótica</h3>
+                <div class="control-group">
+                    <label>Ângulo do Emissor Laser: <span id="laserVal">30°</span></label>
+                    <input type="range" id="laserAngle" min="0" max="80" value="30">
+                </div>
+                <div class="control-group">
+                    <label>Rotação do Espelho: <span id="mirrorVal">45°</span></label>
+                    <input type="range" id="mirrorAngle" min="10" max="80" value="45">
+                </div>
+            </div>
+
+            <!-- PAINEL DE PROGRAMAÇÃO -->
+            <div class="panel">
+                <h3>2. Algoritmo de Controle</h3>
+                <div class="control-group">
+                    <label>Modo do Algoritmo</label>
+                    <select id="algoMode">
+                        <option value="pid">Rastreamento Optoeletrônico (PID)</option>
+                        <option value="binary">Comunicação Óptica (Li-Fi PWM)</option>
+                        <option value="manual">Controle Robótico Manual</option>
+                    </select>
+                </div>
+                <div class="code-box" id="codeDisplay">
+                    // Algoritmo de Controle Óptico<br>
+                    void loop() {<br>
+                    &nbsp;&nbsp;float lux = readPhotoSensor();<br>
+                    &nbsp;&nbsp;if (lux > threshold) {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="active-line">servo.write(calculateAngle(lux));</span><br>
+                    &nbsp;&nbsp;}<br>
+                    }
+                </div>
+            </div>
+
+            <!-- PAINEL DE ROBÓTICA & TELEMETRIA -->
+            <div class="panel">
+                <h3>3. Telemetria do Robô</h3>
+                <div class="telemetry-grid">
+                    <div class="stat-box">
+                        <div class="title">Intensidade Luz (Lux)</div>
+                        <div class="value" id="luxVal">0 lx</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="title">Ângulo Servo Robô</div>
+                        <div class="value" id="servoVal">0°</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="title">Estado Receptor</div>
+                        <div class="value" id="sensorState">BUSCANDO...</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="title">Sinal Lógico</div>
+                        <div class="value" id="logicSignal">LOW (0)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Vinculando o arquivo JavaScript externo -->
+    <script src="script.js"></script>
+</body>
+</html>
