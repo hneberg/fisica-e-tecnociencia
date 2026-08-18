@@ -1,123 +1,414 @@
-// AGUARDA O CARREGAMENTO COMPLETO DA PÁGINA
-document.addEventListener('DOMContentLoaded', () => {
-    
-    // ELEMENTOS DO DOM
-    const canvas = document.getElementById('opticsCanvas');
-    const ctx = canvas.getContext('2d');
-    
-    const colorSlider = document.getElementById('colorSlider');
-    const speedSlider = document.getElementById('speedSlider');
-    const angleSlider = document.getElementById('angleSlider');
-    const pulseBtn = document.getElementById('pulseBtn');
-    const statusText = document.getElementById('robotStatus');
+/* =========================================================
+   MENU MOBILE
+========================================================= */
 
-    // VARIÁVEIS DE ESTADO DO LASER
-    let laserHue = colorSlider.value;
-    let pulseSpeed = parseInt(speedSlider.value);
-    let mirrorAngle = parseInt(angleSlider.value);
-    let photons = [];
-    let isPulsing = false;
+const menuMobile = document.getElementById("menuMobile");
+const nav = document.querySelector(".nav");
 
-    // EVENT LISTENERS
-    colorSlider.addEventListener('input', (e) => {
-        laserHue = e.target.value;
-    });
+menuMobile.addEventListener("click", () => {
 
-    speedSlider.addEventListener('input', (e) => {
-        pulseSpeed = parseInt(e.target.value);
-    });
+    nav.classList.toggle("active");
 
-    angleSlider.addEventListener('input', (e) => {
-        mirrorAngle = parseInt(e.target.value);
-    });
+});
 
-    pulseBtn.addEventListener('click', () => {
-        triggerOpticalPulse();
-    });
 
-    function triggerOpticalPulse() {
-        isPulsing = true;
-        statusText.innerText = "Sinal Óptico Enviado ao Robô!";
-        statusText.style.color = "#ff007f";
+/* =========================================================
+   LABORATÓRIO — SENSOR ÓPTICO
+========================================================= */
 
-        // Cria partículas de fótons
-        for (let i = 0; i < 20; i++) {
-            photons.push({
-                x: 30,
-                y: 200,
-                speedX: pulseSpeed + Math.random() * 2,
-                speedY: 0,
-                size: Math.random() * 4 + 2,
-                reflected: false
-            });
+const lightRange = document.getElementById("lightRange");
+const lightValue = document.getElementById("lightValue");
+const sensorStatus = document.getElementById("sensorStatus");
+const statusDot = document.getElementById("statusDot");
+const laser = document.querySelector(".laser");
+const sensorLight = document.querySelector(".sensor-light");
+const labRobot = document.querySelector(".lab-robot");
+
+function updateSensor() {
+
+    const value = Number(lightRange.value);
+
+    lightValue.textContent = value + "%";
+
+
+    /*
+        Quanto maior a luminosidade,
+        mais intensa fica a representação visual.
+    */
+
+    const intensity = 0.2 + (value / 100) * 1;
+
+    laser.style.opacity = intensity;
+
+    sensorLight.style.opacity = intensity;
+
+
+    /*
+        Simulação da lógica do robô
+    */
+
+    if (value < 30) {
+
+        sensorStatus.textContent =
+            "Pouca luz detectada — robô parado.";
+
+        statusDot.style.background = "#ef4444";
+
+        labRobot.style.transform = "translateX(0px)";
+
+    }
+
+    else if (value < 70) {
+
+        sensorStatus.textContent =
+            "Luminosidade intermediária — sensor analisando.";
+
+        statusDot.style.background = "#facc15";
+
+        labRobot.style.transform = "translateX(30px)";
+
+    }
+
+    else {
+
+        sensorStatus.textContent =
+            "Muita luz detectada — robô avançando.";
+
+        statusDot.style.background = "#22c55e";
+
+        labRobot.style.transform = "translateX(100px)";
+
+    }
+
+}
+
+
+lightRange.addEventListener(
+    "input",
+    updateSensor
+);
+
+
+/* =========================================================
+   BOTÃO DE SIMULAÇÃO
+========================================================= */
+
+const simulateBtn =
+    document.getElementById("simulateBtn");
+
+simulateBtn.addEventListener("click", () => {
+
+    let value = 0;
+
+    const interval = setInterval(() => {
+
+        value += 5;
+
+        lightRange.value = value;
+
+        updateSensor();
+
+        if (value >= 100) {
+
+            clearInterval(interval);
+
         }
+
+    }, 80);
+
+});
+
+
+/* =========================================================
+   QUIZ
+========================================================= */
+
+const questions = [
+
+    {
+        question:
+            "Qual área é responsável por estudar a luz?",
+
+        answers: [
+            "Robótica",
+            "Óptica",
+            "Programação",
+            "Mecânica"
+        ],
+
+        correct: 1
+    },
+
+    {
+        question:
+            "Qual elemento pode detectar informações do ambiente?",
+
+        answers: [
+            "Sensor",
+            "Parafuso",
+            "Gabinete",
+            "Teclado"
+        ],
+
+        correct: 0
+    },
+
+    {
+        question:
+            "O que transforma instruções em ações para o robô?",
+
+        answers: [
+            "Código",
+            "Luz solar",
+            "Plástico",
+            "Bateria"
+        ],
+
+        correct: 0
+    },
+
+    {
+        question:
+            "Qual fenômeno está relacionado ao desvio da luz ao passar de um meio para outro?",
+
+        answers: [
+            "Refração",
+            "Gravidade",
+            "Eletrização",
+            "Combustão"
+        ],
+
+        correct: 0
+    },
+
+    {
+        question:
+            "Qual combinação representa o conceito do OPTIBOT?",
+
+        answers: [
+            "Música + Arte + História",
+            "Robótica + Programação + Óptica",
+            "Matemática + Esporte + Música",
+            "Química + Biologia + Geografia"
+        ],
+
+        correct: 1
+    }
+
+];
+
+
+let currentQuestion = 0;
+
+let score = 0;
+
+
+const questionElement =
+    document.getElementById("question");
+
+const answerButtons =
+    document.querySelectorAll(".answer");
+
+const questionNumber =
+    document.getElementById("questionNumber");
+
+const progressBar =
+    document.getElementById("progressBar");
+
+const quizResult =
+    document.getElementById("quizResult");
+
+
+function loadQuestion() {
+
+    const current =
+        questions[currentQuestion];
+
+
+    questionElement.textContent =
+        current.question;
+
+
+    questionNumber.textContent =
+        `PERGUNTA ${currentQuestion + 1}/${questions.length}`;
+
+
+    progressBar.style.width =
+        `${((currentQuestion + 1) / questions.length) * 100}%`;
+
+
+    answerButtons.forEach((button, index) => {
+
+        button.textContent =
+            current.answers[index];
+
+        button.disabled = false;
+
+        button.style.opacity = "1";
+
+    });
+
+
+    quizResult.textContent = "";
+
+}
+
+
+answerButtons.forEach((button, index) => {
+
+    button.addEventListener("click", () => {
+
+        const current =
+            questions[currentQuestion];
+
+
+        answerButtons.forEach(btn => {
+
+            btn.disabled = true;
+
+        });
+
+
+        if (index === current.correct) {
+
+            score++;
+
+            quizResult.textContent =
+                "🚀 CORRETO! Você mandou muito bem!";
+
+            quizResult.style.color =
+                "#22c55e";
+
+        }
+
+        else {
+
+            quizResult.textContent =
+                "💡 Quase! Continue tentando.";
+
+            quizResult.style.color =
+                "#facc15";
+
+        }
+
 
         setTimeout(() => {
-            statusText.innerText = "Robô Processou os Dados com Sucesso! 🤖✅";
-            statusText.style.color = "#00f3ff";
-        }, 1500);
-    }
 
-    // LOOP DE ANIMAÇÃO DO CANVAS
-    function animate() {
-        // Limpa o canvas
-        ctx.fillStyle = 'rgba(5, 5, 15, 0.2)';
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
+            currentQuestion++;
 
-        // 1. DESENHAR O EMISSOR DE LASER (ÓPTICA + ROBÓTICA)
-        ctx.fillStyle = '#333';
-        ctx.fillRect(10, 180, 30, 40);
-        ctx.fillStyle = `hsl(${laserHue}, 100%, 50%)`;
-        ctx.fillRect(35, 195, 10, 10);
 
-        // 2. DESENHAR O ESPELHO ROBÓTICO NO MEIO
-        ctx.save();
-        ctx.translate(250, 200);
-        ctx.rotate((mirrorAngle * Math.PI) / 180);
-        ctx.fillStyle = '#00f3ff';
-        ctx.shadowBlur = 15;
-        ctx.shadowColor = '#00f3ff';
-        ctx.fillRect(-5, -40, 10, 80);
-        ctx.restore();
+            if (currentQuestion < questions.length) {
 
-        // 3. DESENHAR O SENSOR/ROBÔ RECEPTOR
-        ctx.fillStyle = '#ff007f';
-        ctx.shadowBlur = 10;
-        ctx.shadowColor = '#ff007f';
-        ctx.beginPath();
-        ctx.arc(450, 200, 25, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.fillStyle = '#fff';
-        ctx.fillText('SENSOR', 430, 204);
+                loadQuestion();
 
-        // 4. DESENHAR E MOVER FÓTONS (FEIXE DE LUZ)
-        for (let i = 0; i < photons.length; i++) {
-            let p = photons[i];
-
-            ctx.fillStyle = `hsl(${laserHue}, 100%, 60%)`;
-            ctx.shadowBlur = 10;
-            ctx.shadowColor = `hsl(${laserHue}, 100%, 50%)`;
-            ctx.beginPath();
-            ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-            ctx.fill();
-
-            // Lógica de colisão com o espelho
-            if (p.x >= 245 && !p.reflected) {
-                p.reflected = true;
-                // Altera trajetória baseada no ângulo do espelho
-                p.speedY = (mirrorAngle / 10);
             }
 
-            p.x += p.speedX;
-            p.y += p.speedY;
-        }
+            else {
 
-        // Remover fótons fora da tela
-        photons = photons.filter(p => p.x < canvas.width && p.y > 0 && p.y < canvas.height);
+                finishQuiz();
 
-        requestAnimationFrame(animate);
-    }
+            }
 
-    // Iniciar a animação
-    animate();
+        }, 1200);
+
+    });
+
 });
+
+
+function finishQuiz() {
+
+    questionElement.textContent =
+        "🎉 DESAFIO CONCLUÍDO!";
+
+
+    document.querySelector(".answers").innerHTML = "";
+
+
+    questionNumber.textContent =
+        "RESULTADO FINAL";
+
+
+    progressBar.style.width = "100%";
+
+
+    quizResult.innerHTML = `
+        Você acertou <strong>${score}</strong>
+        de <strong>${questions.length}</strong> perguntas!<br><br>
+
+        ${
+            score === questions.length
+                ? "🏆 PERFEITO! Você é praticamente um engenheiro do futuro!"
+                : "🚀 Continue estudando. O conhecimento é o combustível da inovação!"
+        }
+    `;
+
+}
+
+
+loadQuestion();
+
+
+/* =========================================================
+   BOTÃO FINAL
+========================================================= */
+
+const startBtn =
+    document.getElementById("startBtn");
+
+startBtn.addEventListener("click", () => {
+
+    document
+        .getElementById("laboratorio")
+        .scrollIntoView({
+            behavior: "smooth"
+        });
+
+});
+
+
+/* =========================================================
+   ANIMAÇÃO AO APARECER NA TELA
+========================================================= */
+
+const observer =
+    new IntersectionObserver(
+        entries => {
+
+            entries.forEach(entry => {
+
+                if (entry.isIntersecting) {
+
+                    entry.target.style.opacity = "1";
+
+                    entry.target.style.transform =
+                        "translateY(0)";
+
+                }
+
+            });
+
+        },
+        {
+            threshold: 0.15
+        }
+    );
+
+
+document
+    .querySelectorAll(
+        ".tech-card, .connection-card, .quiz-box, .code-window"
+    )
+    .forEach(element => {
+
+        element.style.opacity = "0";
+
+        element.style.transform =
+            "translateY(40px)";
+
+        element.style.transition =
+            "opacity .8s ease, transform .8s ease";
+
+        observer.observe(element);
+
+    });
